@@ -1,0 +1,30 @@
+.chartArea {
+  margin: 10px;
+}
+.chartName {
+  font-size: 30px;
+  margin: 0px;
+}
+
+.chartContainer {
+  display: flex;
+  flex-direction: column;
+}
+.chartHeaders {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: rgb(41, 24, 89);
+}
+
+.resolutionList {
+  display: grid;
+  grid-template-columns: 40px 40px 40px;
+  list-style-type: none;
+  padding: 0 15px;
+  font-weight: 800;
+}
+.resolutionList > li:hover {
+  cursor: pointer;
+  color: rgb(14, 14, 248);
+}
