@@ -1,10 +1,6 @@
 import axios from "axios";
 import constants from "./constants";
 
-// const callApi = async (endpoint) => {
-//   const response = await axios.get(constants.PATH + endpoint);
-//   return response.data;
-// };
-// export default callApi;
+export const server = axios.create({ baseURL: constants.SERVER_PATH });
 
-export default axios.create({ baseURL: constants.PATH });
+export const newsApi = axios.create({ baseURL: constants.NEWSAPI_PATH });

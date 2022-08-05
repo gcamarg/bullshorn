@@ -5,9 +5,15 @@
   flex-direction: column;
   justify-content: flex-start;
   height: 100vh;
-  min-width: 150px;
-  width: 200px;
+  min-width: 130px;
+  width: 10vw;
   background-color: rgb(22, 22, 50);
+}
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .marketOptions {
@@ -24,7 +30,7 @@
   text-decoration: none;
 }
 
-.marketOptions__text .listItem {
+.listItem {
   background-color: white;
   height: 30px;
   width: 90%;
@@ -36,7 +42,9 @@
 .listItem__text {
   cursor: pointer;
   text-decoration: none;
+  font-size: large;
   font-weight: 600;
+  vertical-align: middle;
 }
 .itemActive {
   color: rgb(220, 22, 22);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import api from "../utils/api";
+import { server } from "../utils/api";
 import SVGChart from "./SVGChart";
 import "./Chart.css";
 import { useMarketSymbolState } from "../Contexts/stateProvider";
@@ -13,7 +13,7 @@ function Chart() {
     setData(null);
 
     const fetchData = async () => {
-      const res = await api.get(
+      const res = await server.get(
         `/api/v1/marketdata/${symbolRelation[0]}/${
           symbolRelation[2]
         }/${symbolRelation[1].replace("/", "")}`

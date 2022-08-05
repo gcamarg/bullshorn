@@ -1,5 +1,8 @@
 .chartArea {
   margin: 10px;
+  width: 62vw;
+  height: 100vh;
+  justify-content: center;
 }
 .chartName {
   font-size: 30px;
@@ -9,6 +12,7 @@
 .chartContainer {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .chartHeaders {
   display: flex;

@@ -4,7 +4,7 @@
   align-items: center;
   background-color: white;
 }
-.login__logo {
+.standard__logo {
   margin: 20px auto;
   width: 150px;
   object-fit: contain;
@@ -150,4 +150,15 @@
 }
 .login__signupBt:hover {
   background: #e7e9ec;
+}
+
+.registeredPopUp {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+}
+
+.hidden {
+  display: none;
 }

@@ -5,7 +5,7 @@ import Portfolio from "./components/Pages/Portfolio";
 import Login from "./components/Login";
 import { useContext } from "react";
 import { StateContext } from "./Contexts/stateProvider";
-import EmailConfirmedPage from "./components/Pages/EmailConfirmedPage";
+import EmailConfirmedPage from "./components/Pages/EmailConfirmation";
 
 function PrivateRoute({ children }) {
   const { loading, authenticated } = useContext(StateContext);

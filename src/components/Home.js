@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Chart from "./Chart";
 import SideBar from "./SideBar";
+import NewsBar from "./NewsBar";
 import "./Home.css";
 
 function Home() {
@@ -9,6 +10,7 @@ function Home() {
       <main className="mainContainer">
         <SideBar />
         <Chart />
+        <NewsBar />
       </main>
     </div>
   );

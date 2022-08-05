@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./SideBar.css";
-import ListItem from "./ListItem";
 import { useMarketSymbolState } from "../Contexts/stateProvider";
-import api from "../utils/api";
+import { server } from "../utils/api";
 
 function SideBar() {
   const { symbolRelation, setSymbolRelation } = useMarketSymbolState();
@@ -10,7 +9,7 @@ function SideBar() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await api.get(`/api/v1/marketdata/${symbolRelation[0]}`);
+      const res = await server.get(`/api/v1/marketdata/${symbolRelation[0]}`);
       setSymbolList(res.data);
     };
     fetchData();

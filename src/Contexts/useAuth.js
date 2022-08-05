@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import api from "../utils/api";
+import { server } from "../utils/api";
 
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -9,10 +9,10 @@ export default function useAuth() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      api.defaults.headers.Authorization = `Bearer ${token}`;
+      server.defaults.headers.Authorization = `Bearer ${token}`;
       setAuthenticated(true);
     } else {
-      api.defaults.headers.Authorization = undefined;
+      server.defaults.headers.Authorization = undefined;
       setAuthenticated(false);
     }
     setLoading(false);
@@ -20,25 +20,45 @@ export default function useAuth() {
 
   const handleLogin = async (username, password) => {
     try {
-      const response = await api.post("/login", {
+      const response = await server.post("/login", {
         username: username,
         password: password,
       });
       if (response.status == 200) {
         setAuthenticated(true);
         localStorage.setItem("token", response.data);
-        return "success";
+        return { status: "success", message: response.message };
       }
     } catch (error) {
       console.log(error.response);
-      return "failed";
+      return { status: "failed", message: error.response.data };
+    }
+  };
+  const handleSignup = async (username, email, password) => {
+    try {
+      const response = await server.post("/api/v1/registration", {
+        userName: username,
+        email: email,
+        password: password,
+      });
+      if (response.status == 200) {
+        return { status: "success", message: response.message };
+      } else {
+        return { status: "failed", message: response.message };
+      }
+    } catch (error) {
+      console.log(error.response);
+      return {
+        status: "failed",
+        message: error.response.data,
+      };
     }
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setAuthenticated(false);
-    api.defaults.headers.Authorization = undefined;
+    server.defaults.headers.Authorization = undefined;
   };
   return {
     symbolRelation,
@@ -46,6 +66,7 @@ export default function useAuth() {
     loading,
     authenticated,
     handleLogin,
+    handleSignup,
     handleLogout,
   };
 }

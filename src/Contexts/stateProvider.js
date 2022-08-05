@@ -10,6 +10,7 @@ export const StateProvider = ({ children }) => {
     loading,
     authenticated,
     handleLogin,
+    handleSignup,
     handleLogout,
   } = useAuth();
   return (
@@ -20,6 +21,7 @@ export const StateProvider = ({ children }) => {
         loading,
         authenticated,
         handleLogin,
+        handleSignup,
         handleLogout,
       }}
     >

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import api from "../../utils/api";
+import { server } from "../../utils/api";
 import {
   PriceFormater,
   PercentualFormater,
@@ -11,10 +11,10 @@ function Portfolio() {
   const [userPortfolio, setUserPortfolio] = useState([]);
 
   async function getData() {
-    const response = await api.get("/api/v1/investments/");
+    const response = await server.get("/api/v1/investments/");
     const data = await Promise.all(
       response.data.map(async (item) => {
-        const quote = await api.get(
+        const quote = await server.get(
           "/api/v1/investments/quote?symbol=" + item.symbol
         );
         return {
@@ -50,7 +50,7 @@ function TableBuilder(data, getData) {
   const [newItem, setNewItem] = useState(initialState);
 
   async function sendAddRequest() {
-    let response = await api.post("/api/v1/investments/", newItem);
+    let response = await server.post("/api/v1/investments/", newItem);
     console.log(response);
     getData();
     hideInputFields();
@@ -146,7 +146,9 @@ function TableBuilder(data, getData) {
   );
 
   async function DeleteItem(e) {
-    let response = await api.delete(`/api/v1/investments/?id=${e.target.id}`);
+    let response = await server.delete(
+      `/api/v1/investments/?id=${e.target.id}`
+    );
     getData();
   }
 
