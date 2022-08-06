@@ -8,7 +8,7 @@ import { StateContext } from "./Contexts/stateProvider";
 import EmailConfirmedPage from "./components/Pages/EmailConfirmation";
 
 function PrivateRoute({ children }) {
-  const { loading, authenticated } = useContext(StateContext);
+  const { authenticated } = useContext(StateContext);
 
   return authenticated ? children : <Navigate to="/login" />;
 }

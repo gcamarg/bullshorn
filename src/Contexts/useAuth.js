@@ -24,13 +24,12 @@ export default function useAuth() {
         username: username,
         password: password,
       });
-      if (response.status == 200) {
+      if (response.status === 200) {
         setAuthenticated(true);
         localStorage.setItem("token", response.data);
         return { status: "success", message: response.message };
       }
     } catch (error) {
-      console.log(error.response);
       return { status: "failed", message: error.response.data };
     }
   };
@@ -41,13 +40,12 @@ export default function useAuth() {
         email: email,
         password: password,
       });
-      if (response.status == 200) {
+      if (response.status === 200) {
         return { status: "success", message: response.message };
       } else {
         return { status: "failed", message: response.message };
       }
     } catch (error) {
-      console.log(error.response);
       return {
         status: "failed",
         message: error.response.data,

@@ -19,18 +19,17 @@ function Login() {
     setMessage("");
     if (action === "login") {
       handleLogin(username, password).then((res) => {
-        if (res.status == "success") {
+        if (res.status === "success") {
           navigate("/", { replace: true });
-        } else if (res.status == "failed") {
+        } else if (res.status === "failed") {
           setMessage(res.message);
         }
       });
     } else if (action === "signup") {
+      setMessage("Processing...");
       handleSignup(username, email, password).then((res) => {
-        if (res.status == "success") {
+        if (res.status === "success") {
           setEmailSentBox(true);
-          // document.querySelector(".login__container").classList.add("hidden");
-          // document.querySelector(".registeredPopUp").classList.remove("hidden");
         } else {
           setMessage(res.message);
         }
@@ -109,13 +108,24 @@ function Login() {
             </form>
             <p className="login__terms">
               By continuing, you agree with Bullshorn's{" "}
-              <a className="login__hyperlink">Conditions of use</a>. Please read{" "}
-              <a className="login__hyperlink">Privacy Notice</a>, and our{" "}
-              <a className="login__hyperlink">Cookies Policy</a>.
+              <a href="" target="_blank" className="login__hyperlink">
+                Conditions of use
+              </a>
+              . Please read{" "}
+              <a href="" target="_blank" className="login__hyperlink">
+                Privacy Notice
+              </a>
+              , and our{" "}
+              <a href="" target="_blank" className="login__hyperlink">
+                Cookies Policy
+              </a>
+              .
             </p>
             <div className="login__help">
               <i className="login__colapse"></i>
-              <a className="login__hyperlink">Need help?</a>
+              <a href="" target="_blank" className="login__hyperlink">
+                Need help?
+              </a>
             </div>
           </div>
           <div className="login__splitter">

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { server } from "../../utils/api";
 
 function EmailConfirmedPage() {
   const { token } = useParams();
-  const navigate = useNavigate();
 
   const [status, setStatus] = useState("waiting");
   const [responseMessage, setResponseMessage] = useState("");
@@ -15,7 +14,7 @@ function EmailConfirmedPage() {
     server
       .get(uri)
       .then((res) => {
-        if (res.status == 200) {
+        if (res.status === 200) {
           setStatus("success");
         }
       })

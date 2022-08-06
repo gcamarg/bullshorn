@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./style.css";
 
 export default function SVGChart(obj) {
@@ -11,12 +11,12 @@ export default function SVGChart(obj) {
   const chartHeight = 500;
   const chartWidth = scale * 1000;
   const candleWidth = chartWidth / dataLength;
-  const [viewBox, setViewBox] = useState({
+  let viewBox = {
     x: chartWidth * (1 - 1 / scale),
     y: 0,
     width: width,
     height: height,
-  });
+  };
 
   const yMinMax = minMax();
   const yMin = yMinMax[0];
@@ -24,10 +24,9 @@ export default function SVGChart(obj) {
   const yRange = yMax - yMin;
   const xMin = data[0].date;
   const xMax = data[dataLength - 1].date;
-  const deltaT = Math.ceil((xMax - xMin) / dataLength);
+  //const deltaT = Math.ceil((xMax - xMin) / dataLength);
   const xRange = (xMax - xMin) * (1 + 1 / dataLength);
-  const xLength = xRange; //assuming data comes ordered
-  // const [ viewBox, setViewBox ] = useState({x: chartWidth*(1-1/scale), y: chartHeight*(1-(yMinMax[2]-yMinMax[0])/yRange), width: width, height: chartHeight*(yMinMax[3]-yMinMax[2])/yRange });
+  //const xLength = xRange; //assuming data comes ordered
   const [localMinMax, setLocalMinMax] = useState([...yMinMax]);
 
   function minMax() {

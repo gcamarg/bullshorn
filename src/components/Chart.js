@@ -6,8 +6,7 @@ import { useMarketSymbolState } from "../Contexts/stateProvider";
 
 function Chart() {
   const [data, setData] = useState(null);
-  const { symbolRelation, setSymbolRelation, authenticated } =
-    useMarketSymbolState();
+  const { symbolRelation, setSymbolRelation } = useMarketSymbolState();
 
   useEffect(() => {
     setData(null);

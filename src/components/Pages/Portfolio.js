@@ -112,12 +112,12 @@ function TableBuilder(data, getData) {
           return (
             <td className="tcell__value">
               <input
-                type={th.id == "buyingDateAndTime" ? "datetime-local" : "text"}
+                type={th.id === "buyingDateAndTime" ? "datetime-local" : "text"}
                 className="input__field add__element hidden"
                 disabled={
-                  th.id == "currentPrice"
+                  th.id === "currentPrice"
                     ? true
-                    : th.id == "percentualChange"
+                    : th.id === "percentualChange"
                     ? true
                     : false
                 }
@@ -165,7 +165,7 @@ function TableBuilder(data, getData) {
   function hideInputFields() {
     const inputFields = document.querySelectorAll(".add__element");
     inputFields.forEach((field) => {
-      if (field.tagName == "input") {
+      if (field.tagName === "input") {
         field.setAttribute("value", "");
       }
       field.classList.add("hidden");
