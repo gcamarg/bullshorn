@@ -51,7 +51,6 @@ function TableBuilder(data, getData) {
 
   async function sendAddRequest() {
     let response = await server.post("/api/v1/investments/", newItem);
-    console.log(response);
     getData();
     hideInputFields();
   }
