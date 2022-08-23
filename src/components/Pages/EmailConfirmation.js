@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { server } from "../../utils/api";
+import constants from "../../utils/constants";
 
 function EmailConfirmedPage() {
   const { token } = useParams();
@@ -10,7 +11,9 @@ function EmailConfirmedPage() {
 
   useEffect(() => {
     const uri =
-      "http://localhost:8080/api/v1/registration/confirmation?token=" + token;
+      constants.SERVER_PATH +
+      "/api/v1/registration/confirmation?token=" +
+      token;
     server
       .get(uri)
       .then((res) => {
