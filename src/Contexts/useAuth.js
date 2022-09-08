@@ -26,7 +26,8 @@ export default function useAuth() {
       });
       if (response.status === 200) {
         setAuthenticated(true);
-        localStorage.setItem("token", response.data);
+        localStorage.setItem("token", response.data.access_token);
+        // localStorage.setItem("token", response.data.refresh_token);
         return { status: "success", message: response.message };
       }
     } catch (error) {

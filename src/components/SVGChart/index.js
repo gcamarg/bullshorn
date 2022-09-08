@@ -282,7 +282,7 @@ export default function SVGChart(obj) {
       <div className="chartComponents">
         <svg
           key="svg1"
-          width="100%"
+          width="95%"
           viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`}
           onWheel={(e) => handleZoom(e)}
           onMouseDown={(e) => handlePan(e)}
@@ -296,7 +296,7 @@ export default function SVGChart(obj) {
         <svg
           key="svg2"
           id="y-axis"
-          width="5%"
+          width="4.75%"
           viewBox={`0 0 ${padding} ${height}`}
         >
           <YAxis />

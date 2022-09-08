@@ -7,8 +7,8 @@ import "./Home.css";
 function Home() {
   return (
     <div className="home">
+      <SideBar />
       <main className="mainContainer">
-        <SideBar />
         <Chart />
         <NewsBar />
       </main>

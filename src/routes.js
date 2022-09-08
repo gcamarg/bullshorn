@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import { useContext } from "react";
 import { StateContext } from "./Contexts/stateProvider";
 import EmailConfirmedPage from "./components/Pages/EmailConfirmation";
+import Footer from "./components/Footer";
 
 function PrivateRoute({ children }) {
   const { authenticated } = useContext(StateContext);
@@ -35,6 +36,7 @@ function Router() {
           />
           <Route path="/login" element={<Login />} />
         </Routes>
+        <Footer />
       </div>
     </BrowserRouter>
   );

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { StateContext } from "../../Contexts/stateProvider";
 import { server } from "../../utils/api";
 import {
   PriceFormater,
@@ -9,26 +10,42 @@ import "./Portfolio.css";
 
 function Portfolio() {
   const [userPortfolio, setUserPortfolio] = useState([]);
+  const { handleLogout } = useContext(StateContext);
+  const [symbolList, setSymbolList] = useState([]);
 
   async function getData() {
-    const response = await server.get("/api/v1/investments/");
-    const data = await Promise.all(
-      response.data.map(async (item) => {
-        const quote = await server.get(
-          "/api/v1/investments/quote?symbol=" + item.symbol
+    try {
+      const response = await server.get("/api/v1/investments/");
+      console.log(response);
+      if (response.status === 200) {
+        const data = await Promise.all(
+          response.data.map(async (item) => {
+            const quote = await server.get(
+              "/api/v1/investments/quote?symbol=" + item.symbol
+            );
+            return {
+              ...item,
+              price: quote.data.c,
+              pChange:
+                ((quote.data.c - item.buyingPrice) * 100) / item.buyingPrice,
+            };
+          })
         );
-        return {
-          ...item,
-          price: quote.data.c,
-          pChange: ((quote.data.c - item.buyingPrice) * 100) / item.buyingPrice,
-        };
-      })
-    );
-    setUserPortfolio(data);
+        setUserPortfolio(data);
+      }
+    } catch (err) {
+      console.log(err);
+      handleLogout();
+      // return { status: "failed", message: response.data.message };
+    }
   }
 
   useEffect(() => {
     getData();
+    // async function getSymbolList(){
+    //   const response = await server.get("/api/v1/marketdata/suggestion");
+    //   setSymbolList(response.data);
+    // }
   }, []);
 
   return (
@@ -112,6 +129,7 @@ function TableBuilder(data, getData) {
             <td className="tcell__value">
               <input
                 type={th.id === "buyingDateAndTime" ? "datetime-local" : "text"}
+                // pattern={th.id === "quantity" ? "[0-9]" : ""}
                 className="input__field add__element hidden"
                 disabled={
                   th.id === "currentPrice"
@@ -123,7 +141,21 @@ function TableBuilder(data, getData) {
                 value={newItem[th.id]}
                 onChange={(e) => {
                   let item = { ...newItem };
-                  item[th.id] = e.target.value.toUpperCase();
+                  if (th.id === "buyingPrice") {
+                    item[th.id] = textTrimmer(e.target.value);
+                  } else if (th.id === "symbol") {
+                    item[th.id] = e.target.value.toUpperCase();
+                  } else if (th.id === "quantity") {
+                    item[th.id] = textTrimmer(e.target.value).replace(".", "");
+                  } else {
+                    item[th.id] = e.target.value;
+                  }
+                  function textTrimmer(text) {
+                    return text
+                      .replace(",", ".")
+                      .replace(/[^0-9.]/g, "")
+                      .replace(/(\..*)\./g, "$1");
+                  }
                   setNewItem(item);
                 }}
               ></input>

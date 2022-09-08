@@ -8,11 +8,11 @@ function NewsBar() {
   useEffect(() => {
     const fetchData = async () => {
       if (searchTerm === "") {
-        const res = await newsApi.get(`/api/getAllDocuments`);
+        const res = await newsApi.get(`/api/v1/news/getAllDocuments`);
         setNews(res.data);
       } else {
         const res = await newsApi.get(
-          `/api/searchTerm?term=` + searchTerm.replace(" ", "-")
+          `/api/v1/news/searchTerm?term=` + searchTerm.replace(" ", "-")
         );
         setNews(res.data);
       }
@@ -39,7 +39,11 @@ function NewsBar() {
 
   return (
     <div className="newsbar">
-      <form action="" className="search__bar">
+      <form
+        action=""
+        onSubmit={(e) => e.preventDefault()}
+        className="search__bar"
+      >
         <input
           type="text"
           name="search__input"
@@ -47,11 +51,13 @@ function NewsBar() {
           placeholder="Search"
           id=""
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
         />
       </form>
 
-      <nav className="sidebar__nav">{news && <NewsMapper />}</nav>
+      <nav className="newsbar__nav">{news && <NewsMapper />}</nav>
     </div>
   );
 }

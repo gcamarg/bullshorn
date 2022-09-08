@@ -10,10 +10,7 @@ function EmailConfirmedPage() {
   const [responseMessage, setResponseMessage] = useState("");
 
   useEffect(() => {
-    const uri =
-      constants.SERVER_PATH +
-      "/api/v1/registration/confirmation?token=" +
-      token;
+    const uri = "/api/v1/registration/confirmation?token=" + token;
     server
       .get(uri)
       .then((res) => {
